@@ -1,6 +1,6 @@
 {
   "name": "gi-feature-playground",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Playground feature for testing purposes.",
   "main": "lib/playground.js",
   "jsnext:main": "src/index.js",
@@ -18,7 +18,7 @@
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-umd": "^6.22.0",
     "babel-preset-es2015": "^6.18.0",
     "eslint": "^3.13.1",
     "webpack": "beta"
