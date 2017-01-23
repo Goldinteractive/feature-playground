@@ -2,7 +2,7 @@
   "name": "gi-feature-playground",
   "version": "0.0.1",
   "description": "Playground feature for testing purposes.",
-  "main": "dist/playground.js",
+  "main": "lib/playground.js",
   "jsnext:main": "src/index.js",
   "repository": {
     "type": "git",
