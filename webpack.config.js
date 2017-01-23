@@ -3,12 +3,8 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 var path = require('path')
 
 var libraryName = 'playground'
-var outputFile = libraryName + '.js'
 
 var plugins = [
-  new webpack.ProvidePlugin({
-    gi: 'gi-js-base'
-  }),
   new webpack.LoaderOptionsPlugin({
     options: {
       context: __dirname
@@ -17,6 +13,10 @@ var plugins = [
 ]
 
 module.exports = function(env) {
+
+  var entry = __dirname + '/src/index.js'
+  var outputPath = __dirname + '/lib'
+  var outputFile = libraryName + '.js'
 
   if (env.mode === 'build') {
     plugins.push(new UglifyJsPlugin({
@@ -35,15 +35,24 @@ module.exports = function(env) {
     outputFile = libraryName + '.min.js'
   }
 
+  if (env.mode == 'demo') {
+    plugins.push(
+      new webpack.ProvidePlugin({
+        base: 'gi-js-base'
+      })
+    )
+
+    entry = __dirname + '/demo/demo.js'
+    outputPath = __dirname + '/demo'
+    outputFile = 'demo.bundle.js'
+  }
+
   var config = {
-    entry: __dirname + '/src/index.js',
+    entry: entry,
     devtool: 'source-map',
     output: {
-      path: __dirname + '/lib',
-      filename: outputFile,
-      library: libraryName,
-      libraryTarget: 'umd',
-      umdNamedDefine: true
+      path: outputPath,
+      filename: outputFile
     },
     module: {
       rules: [
@@ -57,11 +66,17 @@ module.exports = function(env) {
     resolve: {
       modules: [
         path.join(__dirname, 'src'),
-        'node_modules'
+        path.join(__dirname, 'node_modules')
       ],
       extensions: ['.js']
     },
     plugins: plugins
+  }
+
+  if (env.mode != 'demo') {
+    config.output.library = libraryName
+    config.output.libraryTarget = 'umd'
+    config.output.umdNamedDefine = true
   }
 
   return config

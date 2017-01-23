@@ -1,10 +1,10 @@
 /**
  * Playground feature child class for testing purposes.
  */
-class Playground extends gi.features.Feature {
+class Playground extends base.features.Feature {
 
   init() {
-    console.log('Hello World!')
+    this.node.innerHTML = 'Hello World!'
   }
 
   destroy() {}
