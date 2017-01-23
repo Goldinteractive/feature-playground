@@ -6,6 +6,9 @@ var libraryName = 'playground'
 var outputFile = libraryName + '.js'
 
 var plugins = [
+  new webpack.ProvidePlugin({
+    gi: 'gi-js-base'
+  }),
   new webpack.LoaderOptionsPlugin({
     options: {
       context: __dirname
