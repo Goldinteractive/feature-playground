@@ -24,7 +24,7 @@
     "webpack": "beta"
   },
   "dependencies": {
-    "gi-js-base": "^0.0.6"
+    "gi-js-base": "^0.0.7"
   },
   "bugs": {
     "url": "https://github.com/Goldinteractive/feature-playground/issues"
