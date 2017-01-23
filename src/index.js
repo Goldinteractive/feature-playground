@@ -1,3 +1,5 @@
+import base from 'gi-js-base'
+
 /**
  * Playground feature child class for testing purposes.
  */
