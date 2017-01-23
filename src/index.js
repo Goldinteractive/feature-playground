@@ -1,9 +1,9 @@
-import base from 'gi-js-base'
+import gi from 'gi-js-base'
 
 /**
  * Playground feature child class for testing purposes.
  */
-class Playground extends base.features.Feature {
+class Playground extends gi.features.Feature {
 
   init() {
     console.log('Hello World!')
