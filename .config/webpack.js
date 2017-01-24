@@ -1,21 +1,22 @@
 var webpack = require('webpack')
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 var path = require('path')
+var root = path.join(__dirname, '..')
 
 var libraryName = process.env.LIBRARY_NAME
 
 var plugins = [
   new webpack.LoaderOptionsPlugin({
     options: {
-      context: __dirname
+      context: root
     }
   })
 ]
 
 module.exports = function(env = {}) {
 
-  var entry = __dirname + `/${process.env.SOURCE_PATH}/index.js`
-  var outputPath = __dirname + `/${process.env.LIBRARY_PATH}`
+  var entry = path.join(root, process.env.SOURCE_PATH, 'index.js')
+  var outputPath = path.join(root, process.env.LIBRARY_PATH)
   var outputFile = libraryName + '.js'
 
   env.mode = env.mode || 'default'
@@ -44,8 +45,8 @@ module.exports = function(env = {}) {
       })
     )
 
-    entry = __dirname + `/${process.env.DEV_PATH}/demo.js`
-    outputPath = __dirname + `/${process.env.DEV_JS_PATH}`
+    entry = path.join(root, process.env.DEV_PATH, 'demo.js')
+    outputPath = path.join(root, process.env.DEV_JS_PATH)
     outputFile = 'demo.bundle.js'
   }
 
@@ -67,8 +68,8 @@ module.exports = function(env = {}) {
     },
     resolve: {
       modules: [
-        path.join(__dirname, 'src'),
-        path.join(__dirname, 'node_modules')
+        path.join(root, 'src'),
+        path.join(root, 'node_modules')
       ],
       extensions: ['.js']
     },

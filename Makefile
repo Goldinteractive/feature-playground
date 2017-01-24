@@ -5,15 +5,16 @@ LIBRARY_NAME=playground
 
 NODE_MODULES=./node_modules
 SCRIPTS_FOLDER=./.tasks
+CONFIG_FOLDER=./.config
 
 WEBPACK=$(NODE_MODULES)/.bin/webpack
 POSTCSS=$(NODE_MODULES)/.bin/postcss
 ESLINT=$(NODE_MODULES)/.bin/eslint
 BROWSERSYNC=$(NODE_MODULES)/.bin/browser-sync
 
-WEBPACK_CONFIG=./webpack.config.js
-POSTCSS_CONFIG=./postcss.config.js
-BROWSERSYNC_CONFIG=./bsync.config.js
+WEBPACK_CONFIG=$(CONFIG_FOLDER)/webpack.js
+POSTCSS_CONFIG=$(CONFIG_FOLDER)/postcss.js
+BROWSERSYNC_CONFIG=$(CONFIG_FOLDER)/browsersync.js
 
 SOURCE_PATH=./src
 LIBRARY_PATH=./lib
