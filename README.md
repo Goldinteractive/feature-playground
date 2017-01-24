@@ -25,6 +25,12 @@ import Playground from 'gi-feature-playground'
 base.features.add('playground', Playground)
 ```
 
+```sass
+@import 'gi-feature-playground/src/style';
+```
+
+To take over the assets, move the `assets` folder contents inside your project asset folder.
+
 ### Browser compatibility
 
 * Newest two browser versions of Chrome, Firefox, Safari and Edge
@@ -32,7 +38,7 @@ base.features.add('playground', Playground)
 
 ### Development
 
-* `npm run build` - Build production version of the library.
-* `npm run dev` - Build development version of the library and run a watcher.
-* `npm run test` - Test the library.
+* `npm run build` or `make build` - Build production version of the feature.
+* `npm run dev` or `make dev` - Build demo of the feature, run a watcher and start browser-sync.
+* `npm run test` or `make test` - Test the feature.
 * `make jsdoc` - Update documentation inside the `docs` folder.
