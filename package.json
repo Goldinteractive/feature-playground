@@ -1,6 +1,6 @@
 {
   "name": "gi-feature-playground",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Playground feature for testing purposes.",
   "main": "lib/playground.js",
   "jsnext:main": "src/index.js",
