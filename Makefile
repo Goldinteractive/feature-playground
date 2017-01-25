@@ -4,17 +4,19 @@
 LIBRARY_NAME=playground
 
 NODE_MODULES=./node_modules
-SCRIPTS_FOLDER=./.tasks
-CONFIG_FOLDER=./.config
+SCRIPTS_PATH=./.tasks
+CONFIG_PATH=./.config
+DOCS_PATH=./.docs
 
 WEBPACK=$(NODE_MODULES)/.bin/webpack
 POSTCSS=$(NODE_MODULES)/.bin/postcss
 ESLINT=$(NODE_MODULES)/.bin/eslint
 BROWSERSYNC=$(NODE_MODULES)/.bin/browser-sync
 
-WEBPACK_CONFIG=$(CONFIG_FOLDER)/webpack.js
-POSTCSS_CONFIG=$(CONFIG_FOLDER)/postcss.js
-BROWSERSYNC_CONFIG=$(CONFIG_FOLDER)/browsersync.js
+WEBPACK_CONFIG=$(CONFIG_PATH)/webpack.js
+POSTCSS_CONFIG=$(CONFIG_PATH)/postcss.js
+BROWSERSYNC_CONFIG=$(CONFIG_PATH)/browsersync.js
+JSDOC_CONFIG=$(CONFIG_PATH)/jsdoc.json
 
 SOURCE_PATH=./src
 LIBRARY_PATH=./lib
@@ -48,9 +50,10 @@ js-minified:
 jsdoc:
 	# generate js documentation
 	@ jsdoc -r \
-		-d docs \
 		-R README.md \
-		src
+		-c $(JSDOC_CONFIG) \
+		-d $(DOCS_PATH) \
+		$(SOURCE_PATH)
 
 css: sass postcss
 
@@ -69,7 +72,7 @@ postcss:
 
 
 dev:
-	@ $(SCRIPTS_FOLDER)/utils/parallel \
+	@ $(SCRIPTS_PATH)/utils/parallel \
 		"make dev-sync" \
 		"make dev-js" \
 		"make dev-css"
@@ -96,7 +99,7 @@ dev-js:
 
 dev-css:
 	# watch demo sass
-	@ $(SCRIPTS_FOLDER)/utils/parallel \
+	@ $(SCRIPTS_PATH)/utils/parallel \
 		"make dev-sass" \
 		"make dev-postcss"
 

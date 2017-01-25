@@ -1,9 +1,9 @@
 var webpack = require('webpack')
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 var path = require('path')
-var root = path.join(__dirname, '..')
 
-var libraryName = process.env.LIBRARY_NAME
+const root = path.join(__dirname, '..')
+const libraryName = process.env.LIBRARY_NAME
 
 var plugins = [
   new webpack.LoaderOptionsPlugin({
@@ -76,7 +76,7 @@ module.exports = function(env = {}) {
     plugins: plugins
   }
 
-  if (env.mode != 'demo') {
+  if (env.mode != 'dev') {
     config.output.library = libraryName
     config.output.libraryTarget = 'umd'
     config.output.umdNamedDefine = true
