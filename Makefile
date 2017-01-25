@@ -6,7 +6,6 @@ LIBRARY_NAME=playground
 NODE_MODULES=./node_modules
 SCRIPTS_PATH=./.tasks
 CONFIG_PATH=./.config
-DOCS_PATH=./.docs
 
 WEBPACK=$(NODE_MODULES)/.bin/webpack
 POSTCSS=$(NODE_MODULES)/.bin/postcss
@@ -21,6 +20,7 @@ JSDOC_CONFIG=$(CONFIG_PATH)/jsdoc.json
 SOURCE_PATH=./src
 LIBRARY_PATH=./lib
 ASSETS_PATH=./assets
+DOCS_PATH=./docs
 
 DEV_PATH=./demo
 DEV_CSS_PATH=$(DEV_PATH)/css
