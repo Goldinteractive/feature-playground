@@ -18,7 +18,8 @@ or when sackmesser is not used:
 
 After the installation has completed, you can import the module files:
 
-JS (if any):
+#### JS (if any):
+
 ```javascript
 // import complete library with all modules
 import Playground from 'gi-feature-playground'
@@ -26,12 +27,13 @@ import Playground from 'gi-feature-playground'
 base.features.add('playground', Playground)
 ```
 
-Styles (if any):
+#### Styles (if any):
+
 ```sass
 @import 'gi-feature-playground/src/style';
 ```
 
-Assets (if any, but not necessary if installed with sackmesser `feature-install` command):
+#### Assets (if any, but not necessary if installed with sackmesser `feature-install` command):
 
 Move the `assets` folder contents inside your project's asset folder.
 
