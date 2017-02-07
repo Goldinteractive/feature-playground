@@ -32,6 +32,7 @@ Styles (if any):
 ```
 
 Assets (if any, but not necessary if installed with sackmesser `feature-install` command):
+
 Move the `assets` folder contents inside your project's asset folder.
 
 ### Browser compatibility
