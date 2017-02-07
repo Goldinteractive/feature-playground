@@ -1,7 +1,10 @@
+$ft-playground-padding: 40px !default;
+
 .ft-playground {
-  padding: 40px;
+  padding: $ft-playground-padding;
   text-align: center;
   background-color: #eee;
   background-image: resolve('features/playground/sackmesser.png');
   background-size: contain;
 }
+

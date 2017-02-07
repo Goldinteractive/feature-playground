@@ -1,14 +1,4 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("playground", [], factory);
-	else if(typeof exports === 'object')
-		exports["playground"] = factory();
-	else
-		root["playground"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -155,7 +145,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -164,7 +154,45 @@ return /******/ (function(modules) { // webpackBootstrap
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(11)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.variables = mod.exports;
+  }
+})(this, function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  var undef;
+
+  var UID = exports.UID = '_base' + Date.now(),
+      ATTR_FEATURES = exports.ATTR_FEATURES = 'data-feature',
+      ATTR_FEATURES_IGNORE = exports.ATTR_FEATURES_IGNORE = 'data-feature-ignore',
+      T_STRING = exports.T_STRING = 'string',
+      T_UNDEF = exports.T_UNDEF = 'undefined',
+      T_OBJECT = exports.T_OBJECT = 'object',
+      T_NUMBER = exports.T_NUMBER = 'number',
+      T_FUNCTION = exports.T_FUNCTION = 'function',
+      CHECK_EMPTY = exports.CHECK_EMPTY = [undef, null, false, 0, '', '0'];
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -303,7 +331,231 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 1 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports);
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports);
+    global.func = mod.exports;
+  }
+})(this, function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.debounce = debounce;
+  exports.throttle = throttle;
+  /**
+   * Function module.
+   * @module base/utils/func
+   */
+
+  /**
+   * Returns a function, that, as long as it continues to be invoked, will not
+   * be triggered. The function will be called after it stops being called for
+   * N milliseconds. If `immediate` is passed, trigger the function on the
+   * leading edge, instead of the trailing. The function also has a property 'clear'
+   * that is a function which will clear the timer to prevent previously scheduled executions.
+   *
+   * @source underscore.js
+   * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+   * @param {Function} func
+   *   Function to wrap.
+   * @param {Number}   wait
+   *   Timeout in ms (`60`).
+   * @param {Boolean}  immediate
+   *   Whether to execute at the beginning (`false`).
+   *
+   * @returns {Function}
+   *   A new function that wraps the `func` function passed in.
+   */
+  function debounce(func) {
+    var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 60;
+    var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    var timeout, args, context, timestamp, result;
+
+    function later() {
+      var last = Date.now() - timestamp;
+
+      if (last < wait && last > 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          context = args = null;
+        }
+      }
+    }
+
+    var debounced = function debounced() {
+      context = this;
+      args = arguments;
+      timestamp = Date.now();
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+
+    debounced.clear = function () {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+    };
+
+    return debounced;
+  }
+
+  /**
+   * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
+   *
+   * @param {Function} func
+   *   Function to wrap.
+   * @param {Number} wait
+   *   Number of milliseconds that must elapse between `func` invocations.
+   *
+   * @returns {Function}
+   *   A new function that wraps the `func` function passed in.
+   */
+  function throttle(func) {
+    var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 60;
+
+    var ctx, args, rtn, timeoutID; // caching
+    var last = 0;
+
+    return function throttled() {
+      ctx = this;
+      args = arguments;
+      var delta = new Date() - last;
+      if (!timeoutID) if (delta >= wait) call();else timeoutID = setTimeout(call, wait - delta);
+      return rtn;
+    };
+
+    function call() {
+      timeoutID = 0;
+      last = +new Date();
+      rtn = func.apply(ctx, args);
+      ctx = null;
+      args = null;
+    }
+  }
+
+  /**
+   * Request animation frame polyfill method.
+   *
+   * @see https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+   * @see https://developer.mozilla.org/de/docs/Web/API/window/requestAnimationFrame
+   */
+  var rAF = exports.rAF = function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+  }();
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('./check'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.check);
+    global.object = mod.exports;
+  }
+})(this, function (exports, _check) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.extend = extend;
+  exports.cleanEmptyProps = cleanEmptyProps;
+
+
+  /**
+   * Extend any object with other properties.
+   *
+   * @source riot.js
+   * @see https://github.com/riot/riot/blob/master/lib/browser/common/util/misc.js
+   *
+   * @param   {Object} src - Source object.
+   * @returns {Object} The resulting extended object.
+   *
+   * @example
+   * var obj = { foo: 'baz' }
+   * extend(obj, {bar: 'bar', foo: 'bar'})
+   * console.log(obj) => {bar: 'bar', foo: 'bar'}
+   *
+   */
+  function extend(src) {
+    var obj,
+        args = arguments;
+
+    for (var i = 1; i < args.length; ++i) {
+      if (obj = args[i]) {
+        for (var key in obj) {
+          // check if this property of the source object could be overridden
+          if ((0, _check.isWritable)(src, key)) src[key] = obj[key];
+        }
+      }
+    }
+
+    return src;
+  }
+
+  /**
+   * Clean empty properties from given object.
+   *
+   * @param   {Object} src - Source object.
+   * @returns {Object}
+   */
+  /**
+   * Object module.
+   * @module base/utils/object
+   */
+
+  function cleanEmptyProps(src) {
+    for (var key in src) {
+      if ((0, _check.isWritable)(src, key) && (0, _check.isEmpty)(src[key])) {
+        delete src[key];
+      }
+    }
+
+    return src;
+  }
+});
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
@@ -356,12 +608,150 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 2 */
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+;(function(window, undefined) {var observable = function(el) {
+
+  /**
+   * Extend the original object or create a new empty one
+   * @type { Object }
+   */
+
+  el = el || {}
+
+  /**
+   * Private variables
+   */
+  var callbacks = {},
+    slice = Array.prototype.slice
+
+  /**
+   * Public Api
+   */
+
+  // extend the el object adding the observable methods
+  Object.defineProperties(el, {
+    /**
+     * Listen to the given `event` ands
+     * execute the `callback` each time an event is triggered.
+     * @param  { String } event - event id
+     * @param  { Function } fn - callback function
+     * @returns { Object } el
+     */
+    on: {
+      value: function(event, fn) {
+        if (typeof fn == 'function')
+          (callbacks[event] = callbacks[event] || []).push(fn)
+        return el
+      },
+      enumerable: false,
+      writable: false,
+      configurable: false
+    },
+
+    /**
+     * Removes the given `event` listeners
+     * @param   { String } event - event id
+     * @param   { Function } fn - callback function
+     * @returns { Object } el
+     */
+    off: {
+      value: function(event, fn) {
+        if (event == '*' && !fn) callbacks = {}
+        else {
+          if (fn) {
+            var arr = callbacks[event]
+            for (var i = 0, cb; cb = arr && arr[i]; ++i) {
+              if (cb == fn) arr.splice(i--, 1)
+            }
+          } else delete callbacks[event]
+        }
+        return el
+      },
+      enumerable: false,
+      writable: false,
+      configurable: false
+    },
+
+    /**
+     * Listen to the given `event` and
+     * execute the `callback` at most once
+     * @param   { String } event - event id
+     * @param   { Function } fn - callback function
+     * @returns { Object } el
+     */
+    one: {
+      value: function(event, fn) {
+        function on() {
+          el.off(event, on)
+          fn.apply(el, arguments)
+        }
+        return el.on(event, on)
+      },
+      enumerable: false,
+      writable: false,
+      configurable: false
+    },
+
+    /**
+     * Execute all callback functions that listen to
+     * the given `event`
+     * @param   { String } event - event id
+     * @returns { Object } el
+     */
+    trigger: {
+      value: function(event) {
+
+        // getting the arguments
+        var arglen = arguments.length - 1,
+          args = new Array(arglen),
+          fns,
+          fn,
+          i
+
+        for (i = 0; i < arglen; i++) {
+          args[i] = arguments[i + 1] // skip first argument
+        }
+
+        fns = slice.call(callbacks[event] || [], 0)
+
+        for (i = 0; fn = fns[i]; ++i) {
+          fn.apply(el, args)
+        }
+
+        if (callbacks['*'] && event != '*')
+          el.trigger.apply(el, ['*', event].concat(args))
+
+        return el
+      },
+      enumerable: false,
+      writable: false,
+      configurable: false
+    }
+  })
+
+  return el
+
+}
+  /* istanbul ignore next */
+  // support CommonJS, AMD & browser
+  if (true)
+    module.exports = observable
+  else if (typeof define === 'function' && define.amd)
+    define(function() { return observable })
+  else
+    window.observable = observable
+
+})(typeof window != 'undefined' ? window : undefined);
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(13)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -410,30 +800,39 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 3 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(5), __webpack_require__(3), __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if (typeof exports !== "undefined") {
-    factory(exports);
+    factory(exports, require('riot-observable'), require('./utils/object'), require('./variables'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports);
+    factory(mod.exports, global.riotObservable, global.object, global.variables);
     global.features = mod.exports;
   }
-})(this, function (exports) {
+})(this, function (exports, _riotObservable, _object, _variables) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.features = exports.getInstancesByNode = exports.getInstanceByNode = exports.add = exports.reinit = exports.destroy = exports.init = exports.Feature = undefined;
+
+  var _riotObservable2 = _interopRequireDefault(_riotObservable);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -459,11 +858,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     };
   }();
 
-  /**
-   * Features module.
-   * @module base/features
-   */
-
   var features = {};
 
   /**
@@ -479,7 +873,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
     var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-    destroy(container, name);
+    _destroy(container, name);
     init(container, name);
   }
 
@@ -504,20 +898,22 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     var names = name ? name.split(',') : null;
-    var featureNodes = container.querySelectorAll('[data-feature]');
+    var featureNodes = container.querySelectorAll('[' + _variables.ATTR_FEATURES + ']');
 
     for (var i = 0, featureNodesLength = featureNodes.length; i < featureNodesLength; i++) {
       var featureNode = featureNodes[i];
-      var dataFeatures = featureNode.getAttribute('data-feature').split(',');
+      var dataFeatures = featureNode.getAttribute(_variables.ATTR_FEATURES).split(',');
+      var ignoreFeatures = (featureNode.getAttribute(_variables.ATTR_FEATURES_IGNORE) || '').split(',');
 
       dataFeatures.forEach(function (featureName) {
         featureName = featureName.trim();
         var feature = features[featureName];
 
         // continue if feature has not been added
+        // or feature is ignored here
         // or name is not whitelisted
         // or is already initialized on this node
-        if (!feature || name && names.indexOf(featureName) < 0 || featureNode._baseFeatureInstances && featureNode._baseFeatureInstances[featureName]) return true;
+        if (!feature || ignoreFeatures && ignoreFeatures.indexOf(featureName) > -1 || name && names.indexOf(featureName) < 0 || featureNode._baseFeatureInstances && featureNode._baseFeatureInstances[featureName]) return;
 
         var instance = new feature.featureClass(featureName, featureNode, feature.options);
 
@@ -542,19 +938,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
    *   Comma separated string with names of the features
    *   (used by the `data-feature` attribute) which sould be initialized.
    */
-  function destroy() {
+  function _destroy() {
     var container = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.body;
     var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     var names = name ? name.split(',') : null;
-    var featureNodes = container.querySelectorAll('[data-feature]');
+    var featureNodes = container.querySelectorAll('[' + _variables.ATTR_FEATURES + ']');
 
     for (var i = 0, featureNodesLength = featureNodes.length; i < featureNodesLength; i++) {
       var featureNode = featureNodes[i];
       var nodeInstances = getInstancesByNode(featureNode);
+      var ignoreFeatures = (featureNode.getAttribute(_variables.ATTR_FEATURES_IGNORE) || '').split(',');
 
       for (var featureName in nodeInstances) {
-        if (nodeInstances.hasOwnProperty(featureName) && (!name || names.indexOf(featureName) > -1)) {
+        if (nodeInstances.hasOwnProperty(featureName) && (!name || names.indexOf(featureName) > -1) && (!ignoreFeatures || ignoreFeatures.indexOf(featureName) < 0)) {
           nodeInstances[featureName].destroy();
           nodeInstances[featureName] = null;
         }
@@ -652,8 +1049,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         throw new Error("Can't instantiate abstract class!");
       }
 
+      (0, _riotObservable2.default)(this);
+
+      var defaultOptions = this.constructor.defaultOptions || {};
+
       this._node = node;
-      this._options = options;
+      this._options = (0, _object.extend)(defaultOptions, options);
+      this._eventListener = {};
 
       if (!this._node._baseFeatureInstances) {
         this._node._baseFeatureInstances = {};
@@ -662,15 +1064,123 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       this._node._baseFeatureInstances[name] = this;
     }
 
-    /** Return node the feature belongs to. */
+    /**
+     * Return node the feature belongs to.
+     * @returns {Node} Root node the feature belongs to.
+     */
 
 
     _createClass(Feature, [{
+      key: '$',
+      value: function $(selector) {
+        return this._node.querySelector(selector);
+      }
+    }, {
+      key: '$$',
+      value: function $$(selector) {
+        return this._node.querySelectorAll(selector);
+      }
+    }, {
+      key: 'addEventListener',
+      value: function addEventListener(node, type, fn) {
+        var _this = this;
+
+        if (node.length) {
+          node.forEach(function (n) {
+            _this.addEventListener(n, type, fn);
+          });
+
+          return;
+        }
+
+        node.addEventListener(type, fn);
+
+        if (!this._eventListener[type]) {
+          this._eventListener[type] = [];
+        }
+
+        this._eventListener[type].push({ node: node, fn: fn });
+      }
+    }, {
+      key: 'removeEventListener',
+      value: function removeEventListener(node) {
+        var _this2 = this;
+
+        var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+        var fn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+        if (node.length) {
+          node.forEach(function (n) {
+            _this2.removeEventListener(n, type, fn);
+          });
+
+          return;
+        }
+
+        if (type && fn) {
+          node.removeEventListener(type, fn);
+
+          this._eventListener[type].forEach(function (listener, i) {
+            if (node == listener.node && fn == listener.fn) {
+              _this2._eventListener[type].splice(i, 1);
+            }
+          });
+        } else if (type) {
+          this._eventListener[type].forEach(function (listener, i) {
+            if (node == listener.node) {
+              node.removeEventListener(type, listener.fn);
+              _this2._eventListener[type].splice(i, 1);
+            }
+          });
+        } else if (fn) {
+          this.removeAllEventListener(node, fn);
+        } else {
+          this.removeAllEventListener(node);
+        }
+      }
+    }, {
+      key: 'removeAllEventListener',
+      value: function removeAllEventListener() {
+        var _this3 = this;
+
+        var node = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+        var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+        if (node && node.length) {
+          node.forEach(function (n) {
+            _this3.removeAllEventListener(n, fn);
+          });
+
+          return;
+        }
+
+        var _loop = function _loop(type) {
+          if (_this3._eventListener.hasOwnProperty(type)) {
+            _this3._eventListener[type].forEach(function (listener, i) {
+              if ((!node || node == listener.node) && (!fn || fn == listener.fn)) {
+                listener.node.removeEventListener(type, listener.fn);
+              }
+            });
+          }
+        };
+
+        for (var type in this._eventListener) {
+          _loop(type);
+        }
+
+        this._eventListener = [];
+      }
+    }, {
       key: 'init',
       value: function init() {}
     }, {
       key: 'destroy',
-      value: function destroy() {}
+      value: function destroy() {
+        // remove all registered event listeners
+        this.removeAllEventListener();
+        // destroy all features inside
+        _destroy(this._node);
+      }
     }, {
       key: 'node',
       get: function get() {
@@ -688,7 +1198,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   exports.Feature = Feature;
   exports.init = init;
-  exports.destroy = destroy;
+  exports.destroy = _destroy;
   exports.reinit = reinit;
   exports.add = add;
   exports.getInstanceByNode = getInstanceByNode;
@@ -697,7 +1207,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 4 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
@@ -776,35 +1286,37 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 5 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(0), __webpack_require__(7), __webpack_require__(6), __webpack_require__(8), __webpack_require__(1), __webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1), __webpack_require__(12), __webpack_require__(10), __webpack_require__(11), __webpack_require__(2), __webpack_require__(4), __webpack_require__(13)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./utils/check'), require('./utils/dom'), require('./utils/device'), require('./utils/func'), require('./utils/string'), require('./utils/url'));
+    factory(exports, require('./utils/check'), require('./utils/dom'), require('./utils/data'), require('./utils/device'), require('./utils/func'), require('./utils/string'), require('./utils/url'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.check, global.dom, global.device, global.func, global.string, global.url);
+    factory(mod.exports, global.check, global.dom, global.data, global.device, global.func, global.string, global.url);
     global.utils = mod.exports;
   }
-})(this, function (exports, _check, _dom, _device, _func, _string, _url) {
+})(this, function (exports, _check, _dom, _data, _device, _func, _string, _url) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.url = exports.string = exports.func = exports.device = exports.dom = exports.check = undefined;
+  exports.url = exports.string = exports.func = exports.device = exports.data = exports.dom = exports.check = undefined;
 
   var check = _interopRequireWildcard(_check);
 
   var dom = _interopRequireWildcard(_dom);
+
+  var data = _interopRequireWildcard(_data);
 
   var device = _interopRequireWildcard(_device);
 
@@ -833,6 +1345,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
   exports.check = check;
   exports.dom = dom;
+  exports.data = data;
   exports.device = device;
   exports.func = func;
   exports.string = string;
@@ -840,12 +1353,105 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 6 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports !== "undefined") {
+    factory(exports, require('../variables'));
+  } else {
+    var mod = {
+      exports: {}
+    };
+    factory(mod.exports, global.variables);
+    global.data = mod.exports;
+  }
+})(this, function (exports, _variables) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.getCache = getCache;
+  exports.set = set;
+  exports.get = get;
+  exports.remove = remove;
+
+
+  /**
+   * Return base data cache from given node.
+   *
+   * @param   {Element} node - Node to get the cache from.
+   * @returns {Object}
+   */
+  function getCache(node) {
+    return node[_variables.UID] = node[_variables.UID] || {};
+  }
+
+  /**
+   * Set data to node.
+   *
+   * @param {Element} node - Node to set the cache to.
+   * @param {String} key - Data key.
+   * @param {String} value - Value to set.
+   *
+   * @returns {Object}
+   */
+  /**
+   * Data module.
+   * @module base/utils/data
+   */
+
+  function set(node, key, value) {
+    return getCache(node)[key] = value;
+  }
+
+  /**
+   * Return data from given node.
+   *
+   * @param {Element} node - Node to get data from.
+   * @param {String} key - Data key.
+   *
+   * @returns {String}
+   */
+  function get(node, key) {
+    var cache = getCache(node);
+    if (cache[key] === undefined) {
+      cache[key] = node.dataset ? node.dataset[key] : node.getAttribute('data-' + key);
+    }
+    return cache[key];
+  }
+
+  /**
+   * Remove data from given node.
+   *
+   * @param {Element} node - Node to remove data from.
+   * @param {String} key - Data key.
+   */
+  function remove(node, key) {
+    var cache = getCache(node);
+    if (cache) {
+      delete cache[key];
+    } else if (node.dataset) {
+      delete node.dataset[key];
+    } else {
+      node.removeAttribute('data-' + name);
+    }
+  }
+});
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(4)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -968,31 +1574,31 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 7 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(12), __webpack_require__(9)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(14), __webpack_require__(3), __webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('easing-js/easing'), require('./object'));
+    factory(exports, require('easing-js/easing'), require('./object'), require('./func'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.easing, global.object);
+    factory(mod.exports, global.easing, global.object, global.func);
     global.dom = mod.exports;
   }
-})(this, function (exports, _easing, _object) {
+})(this, function (exports, _easing, _object, _func) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.getComputedStyles = exports.rAF = exports.Scroller = undefined;
+  exports.computedStyle = exports.computedStyles = exports.Scroller = undefined;
 
   var easingEquations = _interopRequireWildcard(_easing);
 
@@ -1038,12 +1644,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }();
 
   /**
-   * Return computed styles
+   * Return all computed styles.
    *
-   * @param   {Element} element - Element to get computed style from.
+   * @param   {Element} element - Element to get computed styles from.
    * @returns {Object} Computed styles
    */
-  function getComputedStyles(element) {
+  function computedStyles(element) {
     var computedStyle = {},
         styles = {};
 
@@ -1059,16 +1665,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   }
 
   /**
-   * Request animation frame polyfill method.
+   * Shortcut for get a computed style.
    *
-   * @see https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-   * @see https://developer.mozilla.org/de/docs/Web/API/window/requestAnimationFrame
+   * @param {Element} element - Element to get computed style from.
+   * @param {Element} prop - Style to get.
+   *
+   * @returns {String} Computed style
    */
-  var rAF = function () {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    };
-  }();
+  function computedStyle(element, prop) {
+    return window.getComputedStyle(element, null).getPropertyValue(prop);
+  }
 
   /**
    * Scroller class.
@@ -1157,7 +1763,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           var posX = scrollTargetX ? scrollX + (scrollTargetX - scrollX) * t : scrollX;
 
           if (p < 1) {
-            rAF(tick);
+            (0, _func.rAF)(tick);
             window.scrollTo(posX, posY);
           } else {
             window.scrollTo(scrollTargetX || scrollX, scrollTargetY || scrollY);
@@ -1210,220 +1816,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   };
 
   exports.Scroller = Scroller;
-  exports.rAF = rAF;
-  exports.getComputedStyles = getComputedStyles;
+  exports.computedStyles = computedStyles;
+  exports.computedStyle = computedStyle;
 });
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (typeof exports !== "undefined") {
-    factory(exports);
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports);
-    global.func = mod.exports;
-  }
-})(this, function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.debounce = debounce;
-  exports.throttle = throttle;
-  /**
-   * Function module.
-   * @module base/utils/func
-   */
-
-  /**
-   * Returns a function, that, as long as it continues to be invoked, will not
-   * be triggered. The function will be called after it stops being called for
-   * N milliseconds. If `immediate` is passed, trigger the function on the
-   * leading edge, instead of the trailing. The function also has a property 'clear'
-   * that is a function which will clear the timer to prevent previously scheduled executions.
-   *
-   * @source underscore.js
-   * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
-   * @param {Function} func
-   *   Function to wrap.
-   * @param {Number}   wait
-   *   Timeout in ms (`100`).
-   * @param {Boolean}  immediate
-   *   Whether to execute at the beginning (`false`).
-   *
-   * @returns {Function}
-   *   A new function that wraps the `func` function passed in.
-   */
-  function debounce(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-    if (null == wait) wait = 100;
-
-    function later() {
-      var last = Date.now() - timestamp;
-
-      if (last < wait && last > 0) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        if (!immediate) {
-          result = func.apply(context, args);
-          context = args = null;
-        }
-      }
-    }
-
-    var debounced = function debounced() {
-      context = this;
-      args = arguments;
-      timestamp = Date.now();
-      var callNow = immediate && !timeout;
-      if (!timeout) timeout = setTimeout(later, wait);
-      if (callNow) {
-        result = func.apply(context, args);
-        context = args = null;
-      }
-
-      return result;
-    };
-
-    debounced.clear = function () {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-    };
-
-    return debounced;
-  }
-
-  /**
-   * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
-   *
-   * @param {Function} func
-   *   Function to wrap.
-   * @param {Number} wait
-   *   Number of milliseconds that must elapse between `func` invocations.
-   *
-   * @returns {Function}
-   *   A new function that wraps the `func` function passed in.
-   */
-  function throttle(func, wait) {
-    var ctx, args, rtn, timeoutID; // caching
-    var last = 0;
-
-    return function throttled() {
-      ctx = this;
-      args = arguments;
-      var delta = new Date() - last;
-      if (!timeoutID) if (delta >= wait) call();else timeoutID = setTimeout(call, wait - delta);
-      return rtn;
-    };
-
-    function call() {
-      timeoutID = 0;
-      last = +new Date();
-      rtn = func.apply(ctx, args);
-      ctx = null;
-      args = null;
-    }
-  }
-});
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (typeof exports !== "undefined") {
-    factory(exports, require('./check'));
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports, global.check);
-    global.object = mod.exports;
-  }
-})(this, function (exports, _check) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.extend = extend;
-  exports.cleanEmptyProps = cleanEmptyProps;
-
-
-  /**
-   * Extend any object with other properties.
-   *
-   * @source riot.js
-   * @see https://github.com/riot/riot/blob/master/lib/browser/common/util/misc.js
-   *
-   * @param   {Object} src - Source object.
-   * @returns {Object} The resulting extended object.
-   *
-   * @example
-   * var obj = { foo: 'baz' }
-   * extend(obj, {bar: 'bar', foo: 'bar'})
-   * console.log(obj) => {bar: 'bar', foo: 'bar'}
-   *
-   */
-  function extend(src) {
-    var obj,
-        args = arguments;
-
-    for (var i = 1; i < args.length; ++i) {
-      if (obj = args[i]) {
-        for (var key in obj) {
-          // check if this property of the source object could be overridden
-          if ((0, _check.isWritable)(src, key)) src[key] = obj[key];
-        }
-      }
-    }
-
-    return src;
-  }
-
-  /**
-   * Clean empty properties from given object.
-   *
-   * @param   {Object} src - Source object.
-   * @returns {Object}
-   */
-  /**
-   * Object module.
-   * @module base/utils/object
-   */
-
-  function cleanEmptyProps(src) {
-    for (var key in src) {
-      if ((0, _check.isWritable)(src, key) && (0, _check.isEmpty)(src[key])) {
-        delete src[key];
-      }
-    }
-
-    return src;
-  }
-});
-
-/***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
@@ -1488,42 +1886,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else if (typeof exports !== "undefined") {
-    factory(exports);
-  } else {
-    var mod = {
-      exports: {}
-    };
-    factory(mod.exports);
-    global.variables = mod.exports;
-  }
-})(this, function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  var undef;
-
-  var T_STRING = exports.T_STRING = 'string',
-      T_UNDEF = exports.T_UNDEF = 'undefined',
-      T_OBJECT = exports.T_OBJECT = 'object',
-      T_NUMBER = exports.T_NUMBER = 'number',
-      T_FUNCTION = exports.T_FUNCTION = 'function',
-      CHECK_EMPTY = exports.CHECK_EMPTY = [undef, null, false, 0, '', '0'];
-});
-
-/***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// --------------------------------------------------
@@ -1727,150 +2090,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;// -----------
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-;(function(window, undefined) {var observable = function(el) {
-
-  /**
-   * Extend the original object or create a new empty one
-   * @type { Object }
-   */
-
-  el = el || {}
-
-  /**
-   * Private variables
-   */
-  var callbacks = {},
-    slice = Array.prototype.slice
-
-  /**
-   * Public Api
-   */
-
-  // extend the el object adding the observable methods
-  Object.defineProperties(el, {
-    /**
-     * Listen to the given `event` ands
-     * execute the `callback` each time an event is triggered.
-     * @param  { String } event - event id
-     * @param  { Function } fn - callback function
-     * @returns { Object } el
-     */
-    on: {
-      value: function(event, fn) {
-        if (typeof fn == 'function')
-          (callbacks[event] = callbacks[event] || []).push(fn)
-        return el
-      },
-      enumerable: false,
-      writable: false,
-      configurable: false
-    },
-
-    /**
-     * Removes the given `event` listeners
-     * @param   { String } event - event id
-     * @param   { Function } fn - callback function
-     * @returns { Object } el
-     */
-    off: {
-      value: function(event, fn) {
-        if (event == '*' && !fn) callbacks = {}
-        else {
-          if (fn) {
-            var arr = callbacks[event]
-            for (var i = 0, cb; cb = arr && arr[i]; ++i) {
-              if (cb == fn) arr.splice(i--, 1)
-            }
-          } else delete callbacks[event]
-        }
-        return el
-      },
-      enumerable: false,
-      writable: false,
-      configurable: false
-    },
-
-    /**
-     * Listen to the given `event` and
-     * execute the `callback` at most once
-     * @param   { String } event - event id
-     * @param   { Function } fn - callback function
-     * @returns { Object } el
-     */
-    one: {
-      value: function(event, fn) {
-        function on() {
-          el.off(event, on)
-          fn.apply(el, arguments)
-        }
-        return el.on(event, on)
-      },
-      enumerable: false,
-      writable: false,
-      configurable: false
-    },
-
-    /**
-     * Execute all callback functions that listen to
-     * the given `event`
-     * @param   { String } event - event id
-     * @returns { Object } el
-     */
-    trigger: {
-      value: function(event) {
-
-        // getting the arguments
-        var arglen = arguments.length - 1,
-          args = new Array(arglen),
-          fns,
-          fn,
-          i
-
-        for (i = 0; i < arglen; i++) {
-          args[i] = arguments[i + 1] // skip first argument
-        }
-
-        fns = slice.call(callbacks[event] || [], 0)
-
-        for (i = 0; fn = fns[i]; ++i) {
-          fn.apply(el, args)
-        }
-
-        if (callbacks['*'] && event != '*')
-          el.trigger.apply(el, ['*', event].concat(args))
-
-        return el
-      },
-      enumerable: false,
-      writable: false,
-      configurable: false
-    }
-  })
-
-  return el
-
-}
-  /* istanbul ignore next */
-  // support CommonJS, AMD & browser
-  if (true)
-    module.exports = observable
-  else if (typeof define === 'function' && define.amd)
-    define(function() { return observable })
-  else
-    window.observable = observable
-
-})(typeof window != 'undefined' ? window : undefined);
-
-/***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(3), __webpack_require__(5), __webpack_require__(2), __webpack_require__(4)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(7), __webpack_require__(9), __webpack_require__(6), __webpack_require__(8)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -2016,7 +2241,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     _createClass(Playground, [{
       key: 'init',
       value: function init() {
-        this.node.innerHTML = 'Hello World!';
+        this.node.innerHTML = 'Hello Ruessschti!';
       }
     }, {
       key: 'destroy',
@@ -2067,5 +2292,4 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ })
 /******/ ]);
-});
 //# sourceMappingURL=demo.bundle.js.map

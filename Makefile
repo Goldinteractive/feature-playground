@@ -27,7 +27,10 @@ DEV_CSS_PATH=$(DEV_PATH)/css
 DEV_JS_PATH=$(DEV_PATH)/js
 
 
-build: js js-minified css
+publish: jsdoc build
+	@ npm publish
+
+build: test js js-minified css
 
 test:
 	# check soruce with eslint

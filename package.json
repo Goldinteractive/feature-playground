@@ -25,12 +25,12 @@
     "css-mqpacker": "^5.0.1",
     "cssnano": "^3.10.0",
     "eslint": "^3.14.0",
-    "gi-js-base": "^0.0.16",
+    "gi-js-base": "^0.0.18",
     "postcss-assets": "^4.1.0",
     "postcss-cli": "^2.6.0",
     "postcss-import": "^9.1.0",
     "postcss-pxtorem": "^4.0.0",
-    "webpack": "beta"
+    "webpack": "^2.2.1"
   },
   "browserslist": [
     "> 5%",
