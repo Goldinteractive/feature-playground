@@ -23,7 +23,7 @@ After the installation has completed, you can import the module files:
 ```javascript
 // import complete library with all modules
 import Playground from 'gi-feature-playground'
-
+// ...
 base.features.add('playground', Playground)
 ```
 
