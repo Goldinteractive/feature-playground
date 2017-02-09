@@ -10,7 +10,7 @@ Playground Feature class for testing purposes.
 
 Install this package with sackmesser:
 
-    make feature-install playground
+    make feature-install-playground
 
 or when sackmesser is not used:
 
