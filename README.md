@@ -1,8 +1,8 @@
-## Playground Feature
+## `playground` feature
 
 Playground Feature class for testing purposes.
 
-### Dependencies
+### Global dependencies
 
 * [`gi-js-base`](https://github.com/Goldinteractive/js-base)
 
@@ -25,6 +25,14 @@ After the installation has completed, you can import the module files:
 import Playground from 'gi-feature-playground'
 // ...
 base.features.add('playground', Playground)
+```
+
+Make sure you provide the global dependencies in your webpack config file:
+
+```javascript
+new webpack.ProvidePlugin({
+  base: 'gi-js-base'
+})
 ```
 
 #### Styles (if any):
