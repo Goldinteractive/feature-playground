@@ -1,4 +1,9 @@
+*, *:after, *:before {
+  box-sizing: inherit;
+}
+
 body {
+  box-sizing: border-box;
   margin: 20px;
   line-height: 1.4;
   background-color: white;
